@@ -1,11 +1,11 @@
 FROM alpine AS build
 
-ARG MINIO_RELEASE="RELEASE.2019-07-24T02-02-23Z"
-ARG MINIO_CHECKSUM="30cc447c0cc0b696e17ed7a6affe19c9d9c6bbca59a7e1fb257cf9ac90684b54"
+ARG VERSION="RELEASE.2019-07-24T02-02-23Z"
+ARG CHECKSUM="30cc447c0cc0b696e17ed7a6affe19c9d9c6bbca59a7e1fb257cf9ac90684b54"
 
-ADD https://dl.min.io/server/minio/release/linux-amd64/minio.$MINIO_RELEASE /tmp/minio
+ADD https://dl.min.io/server/minio/release/linux-amd64/minio.$VERSION /tmp/minio
 
-RUN [ "$MINIO_CHECKSUM" = "$(sha256sum /tmp/minio | awk '{print $1}')" ] && \
+RUN [ "$CHECKSUM" = "$(sha256sum /tmp/minio | awk '{print $1}')" ] && \
     chmod 770 /tmp/minio && \
     echo "nogroup:*:100:nobody" > /tmp/group && \
     echo "nobody:*:100:100:::" > /tmp/passwd && \
