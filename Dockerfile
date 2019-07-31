@@ -7,9 +7,9 @@ ADD https://dl.min.io/server/minio/release/linux-amd64/minio.$MINIO_RELEASE /tmp
 
 RUN [ "$MINIO_CHECKSUM" = "$(sha256sum /tmp/minio | awk '{print $1}')" ] && \
     chmod 770 /tmp/minio && \
-    mkdir -p /tmp/data /tmp/config && \
     echo "nogroup:*:100:nobody" > /tmp/group && \
-    echo "nobody:*:100:100:::" > /tmp/passwd
+    echo "nobody:*:100:100:::" > /tmp/passwd && \
+    mkdir -p /tmp/data /tmp/config
 
 
 FROM scratch
