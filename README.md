@@ -9,13 +9,13 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/minio`](https://hub.docker.com/r/ricardbejarano/minio):
 
-- [`RELEASE.2019-07-31T18-57-56Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile)
+- [`RELEASE.2019-08-01T22-18-54Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile)
 
 ### Quay
 
 Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/minio`](https://quay.io/repository/ricardbejarano/minio):
 
-- [`RELEASE.2019-07-31T18-57-56Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile)
+- [`RELEASE.2019-08-01T22-18-54Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile)
 
 
 ## Features
