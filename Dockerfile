@@ -1,7 +1,7 @@
 FROM alpine AS build
 
 ARG VERSION="RELEASE.2019-08-07T01-59-21Z"
-ARG CHECKSUM="7b30d246bf138cda06929cd97ea82394d287448ae8fa3f5ac5c6eedaf03fd4eb"
+ARG CHECKSUM="91e6dffc6f058a2739f7c870545cd92aaa6bcf1b008be8861fd7fd0e265d3e4f"
 
 ADD https://dl.min.io/server/minio/release/linux-amd64/minio.$VERSION /tmp/minio
 
