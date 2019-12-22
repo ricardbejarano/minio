@@ -21,7 +21,7 @@ Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/minio`](https:/
 ## Features
 
 * Super tiny (see [Tags](#tags))
-* Binary pulled from official sources during build time
+* Compiled from source during build time
 * Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
 * Runs as unprivileged (non-`root`) user

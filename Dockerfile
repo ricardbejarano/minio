@@ -1,12 +1,15 @@
-FROM alpine:3 AS build
+FROM golang:1 AS build
 
 ARG VERSION="RELEASE.2019-12-19T22-52-26Z"
-ARG CHECKSUM="733915b24d547cb92f31a3d4cc80041288f5b6218b9b338f07da85c5cf116631"
+ARG CHECKSUM="272378b98c6e4672ef0c9394a503080d0450564e6daf4aab910b2ee1505fb697"
 
-ADD https://dl.min.io/server/minio/release/linux-amd64/minio.$VERSION /tmp/minio
+ADD https://github.com/minio/minio/archive/$VERSION.tar.gz /tmp/minio.tar.gz
 
-RUN [ "$CHECKSUM" = "$(sha256sum /tmp/minio | awk '{print $1}')" ] && \
-    chmod 770 /tmp/minio && \
+RUN [ "$CHECKSUM" = "$(sha256sum /tmp/minio.tar.gz | awk '{print $1}')" ] && \
+    tar -C /tmp -xf /tmp/minio.tar.gz && \
+    mv /tmp/minio-$VERSION /tmp/minio && \
+    cd /tmp/minio && \
+	    make build && \
     echo "nogroup:*:100:nobody" > /tmp/group && \
     echo "nobody:*:100:100:::" > /tmp/passwd && \
     mkdir -p /tmp/data /tmp/config
@@ -14,7 +17,7 @@ RUN [ "$CHECKSUM" = "$(sha256sum /tmp/minio | awk '{print $1}')" ] && \
 
 FROM scratch
 
-COPY --from=build --chown=100:100 /tmp/minio /
+COPY --from=build --chown=100:100 /tmp/minio/minio /
 COPY --from=build --chown=100:100 /tmp/data /data
 COPY --from=build --chown=100:100 /tmp/config /config
 COPY --from=build --chown=100:100 /tmp/group \
