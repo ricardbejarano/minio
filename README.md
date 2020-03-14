@@ -50,7 +50,10 @@ docker build -t minio .
 ├── data/
 ├── etc/
 │   ├── group
-│   └── passwd
+│   ├── passwd
+│   └── ssl/
+│       └── certs/
+│           └── ca-certificates.crt
 └── minio
 ```
 

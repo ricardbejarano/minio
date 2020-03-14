@@ -7,22 +7,21 @@ ADD https://github.com/minio/minio/archive/$VERSION.tar.gz /tmp/minio.tar.gz
 
 RUN [ "$CHECKSUM" = "$(sha256sum /tmp/minio.tar.gz | awk '{print $1}')" ] && \
     tar -C /tmp -xf /tmp/minio.tar.gz && \
-    mv /tmp/minio-$VERSION /tmp/minio && \
-    cd /tmp/minio && \
-	    make build && \
-    echo "nogroup:*:100:nobody" > /tmp/group && \
-    echo "nobody:*:100:100:::" > /tmp/passwd && \
-    mkdir -p /tmp/data /tmp/config
+    apt update && \
+    apt install -y ca-certificates && \
+    cd /tmp/minio-$VERSION && \
+	    make build
+
+RUN mkdir -p /rootfs/etc/ssl/certs /rootfs/config /rootfs/data && \
+    cp /tmp/minio-$VERSION/minio /rootfs/ && \
+    echo "nogroup:*:100:nobody" > /rootfs/etc/group && \
+    echo "nobody:*:100:100:::" > /rootfs/etc/passwd && \
+    cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/
 
 
 FROM scratch
 
-COPY --from=build --chown=100:100 /tmp/minio/minio /
-COPY --from=build --chown=100:100 /tmp/data /data
-COPY --from=build --chown=100:100 /tmp/config /config
-COPY --from=build --chown=100:100 /tmp/group \
-                                  /tmp/passwd \
-                                  /etc/
+COPY --from=build --chown=100:100 /rootfs /
 
 USER 100:100
 VOLUME ["/data", "/config"]
