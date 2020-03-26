@@ -10,7 +10,7 @@ RUN [ "$CHECKSUM" = "$(sha256sum /tmp/minio.tar.gz | awk '{print $1}')" ] && \
     apt update && \
     apt install -y ca-certificates && \
     cd /tmp/minio-$VERSION && \
-	    make build
+      make build
 
 RUN mkdir -p /rootfs/etc/ssl/certs /rootfs/config /rootfs/data && \
     cp /tmp/minio-$VERSION/minio /rootfs/ && \
