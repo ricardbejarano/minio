@@ -9,13 +9,13 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/minio`](https://hub.docker.com/r/ricardbejarano/minio):
 
-- [`RELEASE.2020-03-25T07-03-04Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile) (about `61.6MB`)
+- [`RELEASE.2020-04-02T21-34-49Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile) (about `61.6MB`)
 
 ### Quay
 
 Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/minio`](https://quay.io/repository/ricardbejarano/minio):
 
-- [`RELEASE.2020-03-25T07-03-04Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile) (about `61.6MB`)
+- [`RELEASE.2020-04-02T21-34-49Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile) (about `61.6MB`)
 
 
 ## Features
