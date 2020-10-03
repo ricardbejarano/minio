@@ -1,7 +1,7 @@
 FROM golang:1 AS build
 
-ARG VERSION="RELEASE.2020-09-26T03-44-56Z"
-ARG CHECKSUM="8690bb968685e3d18a68b58ef77e60be24c775f92c8c50c4909dce4e2a48e6e1"
+ARG VERSION="RELEASE.2020-10-03T02-19-42Z"
+ARG CHECKSUM="37411dcbcda9b1b4a963da5545f6defb1fb4281cd2cedb1805e9699dd82913b2"
 
 ADD https://github.com/minio/minio/archive/$VERSION.tar.gz /tmp/minio.tar.gz
 
