@@ -6,7 +6,7 @@ ARG CHECKSUM="78ec140c5cbe1a10774576147847f1bdef1e266017e28268be0cd6d76f538be1"
 ADD https://github.com/minio/minio/archive/$VERSION.tar.gz /tmp/minio.tar.gz
 
 RUN [ "$(sha256sum /tmp/minio.tar.gz | awk '{print $1}')" = "$CHECKSUM" ] && \
-    apk add ca-certificates make && \
+    apk add bash ca-certificates make && \
     tar -C /tmp -xf /tmp/minio.tar.gz && \
     mkdir -p /go/src/github.com/minio && \
     mv /tmp/minio-$VERSION /go/src/github.com/minio/minio && \
