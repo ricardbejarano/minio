@@ -1,4 +1,4 @@
-FROM golang:1-alpine AS build
+FROM golang:1 AS build
 
 ARG VERSION="RELEASE.2021-01-16T02-19-44Z"
 ARG CHECKSUM="78ec140c5cbe1a10774576147847f1bdef1e266017e28268be0cd6d76f538be1"
@@ -6,7 +6,8 @@ ARG CHECKSUM="78ec140c5cbe1a10774576147847f1bdef1e266017e28268be0cd6d76f538be1"
 ADD https://github.com/minio/minio/archive/$VERSION.tar.gz /tmp/minio.tar.gz
 
 RUN [ "$(sha256sum /tmp/minio.tar.gz | awk '{print $1}')" = "$CHECKSUM" ] && \
-    apk add bash ca-certificates make && \
+    apt update && \
+    apt install -y ca-certificates && \
     tar -C /tmp -xf /tmp/minio.tar.gz && \
     mkdir -p /go/src/github.com/minio && \
     mv /tmp/minio-$VERSION /go/src/github.com/minio/minio && \
