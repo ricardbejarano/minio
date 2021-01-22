@@ -1,30 +1,35 @@
-FROM golang:1 AS build
+FROM golang:1-alpine AS build
 
 ARG VERSION="RELEASE.2021-01-16T02-19-44Z"
 ARG CHECKSUM="78ec140c5cbe1a10774576147847f1bdef1e266017e28268be0cd6d76f538be1"
 
 ADD https://github.com/minio/minio/archive/$VERSION.tar.gz /tmp/minio.tar.gz
 
-RUN [ "$CHECKSUM" = "$(sha256sum /tmp/minio.tar.gz | awk '{print $1}')" ] && \
+RUN [ "$(sha256sum /tmp/minio.tar.gz | awk '{print $1}')" = "$CHECKSUM" ] && \
+    apk add ca-certificates && \
     tar -C /tmp -xf /tmp/minio.tar.gz && \
-    apt update && \
-    apt install -y ca-certificates && \
-    cd /tmp/minio-$VERSION && \
+    mkdir -p /go/src/github.com/minio && \
+    mv /tmp/minio-$VERSION /go/src/github.com/minio/minio && \
+    cd /go/src/github.com/minio/minio && \
       make build
 
-RUN mkdir -p /rootfs/etc/ssl/certs /rootfs/config /rootfs/data && \
-    cp /tmp/minio-$VERSION/minio /rootfs/ && \
-    echo "nogroup:*:100:nobody" > /rootfs/etc/group && \
-    echo "nobody:*:100:100:::" > /rootfs/etc/passwd && \
-    cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/
+RUN mkdir -p /rootfs/bin && \
+      cp /go/src/github.com/minio/minio/minio /rootfs/bin/ && \
+    mkdir -p /rootfs/config && \
+    mkdir -p /rootfs/data && \
+    mkdir -p /rootfs/etc && \
+      echo "nogroup:*:10000:nobody" > /rootfs/etc/group && \
+      echo "nobody:*:10000:10000:::" > /rootfs/etc/passwd && \
+    mkdir -p /rootfs/etc/ssl/certs && \
+      cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/
 
 
 FROM scratch
 
-COPY --from=build --chown=100:100 /rootfs /
+COPY --from=build --chown=10000:10000 /rootfs /
 
-USER 100:100
-VOLUME ["/data", "/config"]
+USER 10000:10000
+VOLUME ["/config", "/data"]
 EXPOSE 9000/tcp
-ENTRYPOINT ["/minio"]
+ENTRYPOINT ["/bin/minio"]
 CMD ["--config-dir", "/config", "server", "/data"]

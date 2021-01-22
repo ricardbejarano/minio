@@ -1,28 +1,28 @@
 <p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/198/peacock_1f99a.png" width="120px"></p>
 <h1 align="center">minio (container image)</h1>
-<p align="center">Minimal container image of the <a href="https://min.io/">MinIO object storage server</a></p>
+<p align="center">Built-from-source container image of the <a href="https://minio.io">MinIO</a> object storage server</p>
 
 
 ## Tags
 
 ### Docker Hub
 
-Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/minio`](https://hub.docker.com/r/ricardbejarano/minio):
+Available on Docker Hub as [`docker.io/ricardbejarano/minio`](https://hub.docker.com/r/ricardbejarano/minio):
 
-- [`RELEASE.2021-01-16T02-19-44Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile) (about `61.6MB`)
+- [`RELEASE.2021-01-16T02-19-44Z`, `latest` *(Dockerfile)*](Dockerfile)
 
-### Quay
+### RedHat Quay
 
-Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/minio`](https://quay.io/repository/ricardbejarano/minio):
+Available on RedHat Quay as [`quay.io/ricardbejarano/minio`](https://quay.io/repository/ricardbejarano/minio):
 
-- [`RELEASE.2021-01-16T02-19-44Z`, `master`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/minio/blob/master/Dockerfile) (about `61.6MB`)
+- [`RELEASE.2021-01-16T02-19-44Z`, `latest` *(Dockerfile)*](Dockerfile)
 
 
 ## Features
 
-* Super tiny (see [Tags](#tags))
 * Compiled from source during build time
-* Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
+* Built `FROM scratch`, with zero bloat
+* Statically linked to the [`musl`](https://musl.libc.org/) implementation of the C standard library
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
 * Runs as unprivileged (non-`root`) user
 
@@ -30,7 +30,7 @@ Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/minio`](https:/
 ## Building
 
 ```bash
-docker build -t minio .
+docker build --tag ricardbejarano/minio --file Dockerfile .
 ```
 
 
@@ -42,22 +42,6 @@ docker build -t minio .
 - Mount your **configuration** at `/config`.
 
 
-## Filesystem
-
-```
-/
-├── config/
-├── data/
-├── etc/
-│   ├── group
-│   ├── passwd
-│   └── ssl/
-│       └── certs/
-│           └── ca-certificates.crt
-└── minio
-```
-
-
 ## License
 
-See [LICENSE](https://github.com/ricardbejarano/minio/blob/master/LICENSE).
+MIT licensed, see [LICENSE](LICENSE) for more details.
