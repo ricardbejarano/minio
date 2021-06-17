@@ -9,13 +9,13 @@
 
 Available on Docker Hub as [`docker.io/ricardbejarano/minio`](https://hub.docker.com/r/ricardbejarano/minio):
 
-- [`RELEASE.2021-06-14T01-29-23Z`, `latest` *(Dockerfile)*](Dockerfile)
+- [`RELEASE.2021-06-17T00-10-46Z`, `latest` *(Dockerfile)*](Dockerfile)
 
 ### RedHat Quay
 
 Available on RedHat Quay as [`quay.io/ricardbejarano/minio`](https://quay.io/repository/ricardbejarano/minio):
 
-- [`RELEASE.2021-06-14T01-29-23Z`, `latest` *(Dockerfile)*](Dockerfile)
+- [`RELEASE.2021-06-17T00-10-46Z`, `latest` *(Dockerfile)*](Dockerfile)
 
 
 ## Features
