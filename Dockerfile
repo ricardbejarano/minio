@@ -1,7 +1,7 @@
 FROM golang:1-alpine AS build
 
-ARG VERSION="RELEASE.2024-07-31T05-46-26Z"
-ARG CHECKSUM="68c13011f8ddd9179e9336f67a3761e625145bd405fcc4aeb1d59ee25d57ab1c"
+ARG VERSION="RELEASE.2024-08-03T04-33-23Z"
+ARG CHECKSUM="b0223962d0d46fd0a98ec7c08faaa2b89a1947bf4fd8ce7ed1792dcdf82f6098"
 
 ADD https://github.com/minio/minio/archive/$VERSION.tar.gz /tmp/minio.tar.gz
 
